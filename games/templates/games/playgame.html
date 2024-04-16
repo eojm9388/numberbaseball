@@ -15,15 +15,11 @@
 
 
 
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="player1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form action="">
+    <form action="{% url "player1_number" player.pk%}" method="POST">
+      {% csrf_token %}
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">숫자를 입력하세요 (0 ~ 9까지 정수)</h1>
@@ -48,7 +44,7 @@
 <!-- Modal -->
 <div class="modal fade" id="player2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form action="">
+    <form action="{% url "player2_number" player.pk%}" method="POST">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">숫자를 입력하세요 (0 ~ 9까지 정수)</h1>

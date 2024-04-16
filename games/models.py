@@ -1,10 +1,21 @@
 from django.db import models
 
 # Create your models here.
-class Player(models.Model):
-    nickname1 = models.CharField(max_length=20)
-    number1 = models.CharField(max_length=4)
-    expect1 = models.CharField(max_length=4)
-    nickname2 = models.CharField(max_length=20)
-    number2 = models.CharField(max_length=4)
-    expect2 = models.CharField(max_length=4)
+class Player1(models.Model):
+    nickname = models.CharField(max_length=20)
+    number = models.CharField(max_length=4)
+    
+class Player2(models.Model):
+    nickname = models.CharField(max_length=20)
+    number = models.CharField(max_length=4)
+
+
+class Expect1(models.Model):
+    player = models.ForeignKey(Player1, on_delete=models.CASCADE)
+    expect = models.CharField(max_length=4)
+
+
+class Expect2(models.Model):
+    player = models.ForeignKey(Player2, on_delete=models.CASCADE)
+    expect = models.CharField(max_length=4)
+

@@ -1,13 +1,34 @@
 from django.shortcuts import render, redirect
 # from .forms import PlayerForm, PlayerNumForm
-# from .models import Player
+from .models import Player1, Player2
 # Create your views here.
 def index(request):
-    
-    
+    player1 = Player1.objects.all()
+    player2 = Player2.objects.all()
+    if len(player1) == 0:
+        turn = 1
+    elif len(player2) > 0:
+        turn = 3
+    else:
+        turn = 2
 
-    return render(request, 'games/index.html')
+    context = {
+        'turn': turn
+    }
 
+    return render(request, 'games/index.html', context)
+
+def player1_number(request):    
+    player1 = Player1(nickname=request.POST.get('nickname-player1'), number=request.POST.get('number-player1'))
+    player1.save()
+
+    return redirect('index')
+
+def player2_number(request):    
+    player2 = Player2(nickname=request.POST.get('nickname-player2'), number=request.POST.get('number-player2'))
+    player2.save()
+
+    return redirect('index')
 
 def create_player(request):
 
@@ -31,23 +52,4 @@ def play_game(request):
     return render(request, 'games/playgame.html', context)
 
 
-def player1_number(request, game_pk):    
-    player = Player(pk=game_pk)
 
-    if request.method == 'POST':
-        player.number1 = request.POST.get('play1-number')
-        player.save()
-    
-    print(request.POST.get('play2-number'))
-    return redirect('play_game')
-
-
-def player2_number(request, game_pk):    
-    player = Player(pk=game_pk)
-
-    if request.method == 'POST':
-        player.number2 = request.POST.get('play2-number')
-        player.save()
-
-    print(request.POST.get('play1-number'))
-    return redirect('play_game')

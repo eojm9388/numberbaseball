@@ -10,10 +10,12 @@
     <p class="lead mb-4">게임 설명 넣을 예정</p>
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
       
-      <a href="{% url "play_game"%}" class="btn btn-primary btn-lg px-4 gap-3">
+      <a href="#" class="btn btn-primary btn-lg px-4 gap-3">
         게임 시작
       </a>
-      <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#playler-setting">인원설정</button>
+      {% if turn != 3 %}
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#playler-setting">인원설정</button>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -22,32 +24,63 @@
 
 
 <!-- Modal -->
+{% if turn == 1 %}
 <div class="modal fade" id="playler-setting" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h1 class="modal-title fs-5" id="exampleModalLabel">인원 설정 (Player1)</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">인원 설정 (Player1)</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{% url "player1_number" %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nickname-player1" class="form-label">이름</label>
+            <input type="text" class="form-control" id="nickname-player1" name='nickname-player1'>
+          </div>
+          <div class="mb-3">
+            <label for="number-player1" class="form-label">숫자</label>
+            <input type="password" class="form-control" id="number-player1" name='number-player1'>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-primary" value="설정">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
     </div>
-    <form action="{% url "create_player" %}" method="POST">
-      {% csrf_token %}
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="nickname-player1" class="form-label">이름</label>
-          <input type="text" class="form-control" id="nickname-player1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <div> </div>
-          <label for="exampleInputPassword1" class="form-label">숫자</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name='play1-number'>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <input type="submit" class="btn btn-primary" value="설정">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </form>
   </div>
-</div>
-</div>
+  </div>
+{% elif turn == 2 %}
+<div class="modal fade" id="playler-setting" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">인원 설정 (Player2)</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="{% url "player2_number" %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nickname-player2" class="form-label">이름</label>
+            <input type="text" class="form-control" id="nickname-player2" name='nickname-player2'>
+          </div>
+          <div class="mb-3">
+            <label for="number-player2" class="form-label">숫자</label>
+            <input type="password" class="form-control" id="number-player2" name='number-player2'>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-primary" value="설정">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+
+{% endif %}
+
 {% endblock content %}

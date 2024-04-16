@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-cente game-board">
+  <!-- Player1 Button  -->
+  <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#player1">
+    플레이어 1 숫자 입력
+  </button>
+  
+  <!-- Player2 Button -->
+  <button type="button" class="btn btn-primary mx-5" data-bs-toggle="modal" data-bs-target="#player2">
+    플레이어 2 숫자 입력
+  </button>
+</div>
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="player1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">숫자를 입력하세요 (0 ~ 9까지 정수)</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">숫자</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name='play1-number'>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
+          <input type="submit"  class="btn btn-outline-success" value="숫자 등록">
+        </div>
+      </div>
+    </div>
+    </form>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="player2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">숫자를 입력하세요 (0 ~ 9까지 정수)</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">숫자</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name='play2-number'>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
+          <input type="submit"  class="btn btn-outline-success" value="숫자 등록">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

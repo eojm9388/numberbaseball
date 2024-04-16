@@ -1,14 +1,26 @@
-from django.shortcuts import render
-from .forms import Player1Form, Player2Form
-
+from django.shortcuts import render, redirect
+from .forms import PlayerForm, PlayerNumForm
 # Create your views here.
 def index(request):
 
-    form1 = Player1Form()
-    form2 = Player2Form()
+    form = PlayerForm()
+    
     context = {
-        'form1': form1,
-        'form2': form2,
+        'form': form,
     }
 
     return render(request, 'games/index.html', context)
+
+
+def create_player(request):
+
+    if request.method == 'POST':
+        form = PlayerForm(request.POST)
+        form.save()
+
+    return redirect('index')
+
+
+def play_game(request):
+    
+    return render(request, 'games/playgame.html')

@@ -1,12 +1,14 @@
 from django import forms
-from .models import Player1, Player2
+from .models import Player
 
-class Player1Form(forms.ModelForm):
+class PlayerForm(forms.ModelForm):
     class Meta:
-        model = Player1
-        fields = ('nickname',)
+        model = Player
+        fields = ('nickname1', 'nickname2')
 
-class Player2Form(forms.ModelForm):
+class PlayerNumForm(forms.ModelForm):
     class Meta:
-        model = Player2
-        fields = ('nickname',)
+        model = Player
+        fields = ('number1', 'number2')
+
+

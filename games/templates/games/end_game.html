@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center"></div>
+<h1></h1>
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold text-body-emphasis">{{ winner }}님이 이기셨습니다.</h1>
+  <div class="col-lg-6 mx-auto">
+    <div class="row mt-5">
+      <div class='col-6'>
+        <h2>{{ player1.nickname }}님의 숫자</h2>
+        <div>
+          <h2>{{ player1.number }}</h2>
+        </div>
+      </div>
+      <div class='col-6'>
+        <h2>{{ player2.nickname }}님의 숫자</h2>
+        <div>
+          <h2>{{ player2.number }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center m-5">
+      <form action="{% url "restart" %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary btn-lg px-4 me-sm-3" value="다시하기">
+      </form>
+    </div>
+  </div>
+  <div class="overflow-hidden" style="max-height: 30vh;">
+    
+  </div>
+</div>
+
+{% endblock content %}

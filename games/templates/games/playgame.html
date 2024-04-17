@@ -4,34 +4,77 @@
 <div class="container text-center">
   <div class="row gx-5">
     <div class="col player me-5 border border-3 border-primary rounded-5 border-opacity-50">
+      <form action="{% url "play_turn" %}" method="POST">
       <div class="row g-3 mt-3 mb-3 align-items-center justify-content-md-center">
-        <div class="col-2">
-          <label for="expect1" class="col-form-label">숫자</label>
+          {% csrf_token %}
+          <div class="col-2">
+            <label for="expect1" class="col-form-label">숫자</label>
+          </div>
+          <div class="col-5">
+            {% if turn_player == 1 %}
+            <input type="text" id="expect1" class="form-control form-control-lg" name="expect1">
+            {% elif turn_player == 2 %}
+            <input type="text" id="expect1" class="form-control form-control-lg" name="expect1" disabled>
+            {% endif %}
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary" id="liveAlertBtn1" value="입력">
+          </div>
+        </div> 
+      </form>
+        <div class="row">
+          {% for guess in expect1 %}
+          <div class="col-5 border border-primary-subtle mx-3 my-2 py-2 rounded-3">
+                {{ guess.expect }}
+                {% if guess.color == 'blue' %}
+                <span class="badge text-bg-primary">{{ guess.status }}</span>
+                {% elif guess.color == 'green' %}
+                <span class="badge text-bg-success">{{ guess.status }}</span>
+                {% elif guess.color == 'red' %}
+                <span class="badge text-bg-danger">{{ guess.status }}</span>
+                {% endif %}
+          </div>
+          {% endfor %}
         </div>
-        <div class="col-5">
-          <input type="text" id="expect1" class="form-control form-control-lg">
-        </div>
-        <div class="col-2">
-          <input type="submit" class="btn btn-primary" id="liveAlertBtn1" value="입력">
-        </div>
-      </div>
-      <div id="liveAlertPlaceholder1"></div>
     </div>
     <div class="col player border border-3 border-primary rounded-5 border-opacity-50">
-      <div class="row g-3 mt-3 mb-3 align-items-center justify-content-md-center">
-        <div class="col-2">
-          <label for="expect2" class="col-form-label">숫자</label>
+      <form action="{% url "play_turn" %}" method="POST">
+        {% csrf_token %}
+        <div class="row g-3 mt-3 mb-3 align-items-center justify-content-md-center">
+          <div class="col-2">
+            <label for="expect2" class="col-form-label">숫자</label>
+          </div>
+          <div class="col-5">
+            {% if turn_player == 1 %}
+            <input type="text" id="expect2" class="form-control form-control-lg" name="expect2" disabled>
+            {% elif turn_player == 2 %}
+            <input type="text" id="expect2" class="form-control form-control-lg" name="expect2">
+            {% endif %}
+          </div>
+          <div class="col-2">
+            <input type="submit" class="btn btn-primary" id="liveAlertBtn2" value="입력">
+          </div>
         </div>
-        <div class="col-5">
-          <input type="text" id="expect2" class="form-control form-control-lg" disabled>
-        </div>
-        <div class="col-2">
-          <input type="submit" class="btn btn-primary" id="liveAlertBtn2" value="입력">
-        </div>
+      </form>
+      <div class="row">
+        {% for guess in expect2 %}
+        <div class="col-5 border border-primary-subtle mx-3 my-2 py-2 rounded-3">
+          {{ guess.expect }}
+          {% if guess.color == 'blue' %}
+          <span class="badge text-bg-primary">{{ guess.status }}</span>
+          {% elif guess.color == 'green' %}
+          <span class="badge text-bg-success">{{ guess.status }}</span>
+          {% elif guess.color == 'red' %}
+          <span class="badge text-bg-danger">{{ guess.status }}</span>
+          {% endif %}
+    </div>
+        {% endfor %}
       </div>
-      <div id="liveAlertPlaceholder2"></div>
     </div>
   </div>
 </div>
+
+
+
 
 {% endblock content %}
